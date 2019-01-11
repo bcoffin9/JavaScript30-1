@@ -96,6 +96,37 @@
   </div>
 
 <script>
+  const checks = document.querySelectorAll('input');
+
+  //add eventlistener to checkboxes
+  checks.forEach(check => {
+    check.addEventListener('click', processCheck);
+  });
+
+  //here is where i will set the context
+  let lastChecked;
+  function processCheck(e) {
+
+    let inBetween = false;
+    if(e.shiftKey && this.checked) {
+      //go ahead and do what we please
+      //loop over every single checkbox
+      checks.forEach(check => {
+        console.log(check);
+        if(check === this || check === lastChecked) {
+          inBetween = !inBetween;
+          console.log('starting to check them in between');
+          //check.checked = true;
+        }
+
+        if(inBetween) {
+          check.checked = true;
+        }
+      })
+    }
+      lastChecked = this;
+    
+  }
 </script>
 </body>
 </html>
